@@ -1,17 +1,20 @@
 {
   "version": 2,
   "builds": [
-    { "src": "*.html", "use": "@vercel/static" }
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "images/**/*", "use": "@vercel/static" }
   ],
   "routes": [
     { 
-      "src": "/images/(.*)", 
+      "src": "/images/(.*)",
       "headers": { 
         "cache-control": "public, max-age=31536000, immutable",
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type"
       },
-      "dest": "/images/$1" 
+      "continue": true
     },
-    { "src": "/(.*)", "dest": "/index.html" }
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
