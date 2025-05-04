@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KOL Pokemon - 捕捉网红的神奇工具</title>
-  <link rel="icon" href="images/logo/pokeball48.svg" type="image/svg+xml">
+  <link rel="icon" href="/images/logo/pokeball48.svg" type="image/svg+xml">
   <style>
     :root {
       --pokemon-blue: #3D7DCA;
@@ -156,7 +156,7 @@
       transform: translateY(-50%);
       width: 24px;
       height: 24px;
-      background-image: url('images/logo/pokeball48.svg');
+      background-image: url('/images/logo/pokeball48.svg');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
@@ -197,7 +197,7 @@
       position: absolute;
       width: 60px;
       height: 60px;
-      background-image: url('images/logo/pokeball48.svg');
+      background-image: url('/images/logo/pokeball48.svg');
       background-size: contain;
       background-repeat: no-repeat;
       opacity: 0.2;
@@ -708,7 +708,7 @@
         pokemonIcon.style.width = '60px';
         pokemonIcon.style.height = '60px';
         pokemonIcon.style.margin = '10px auto';
-        pokemonIcon.style.backgroundImage = "url('images/pokemons icon/019-mew.png')";
+        pokemonIcon.style.backgroundImage = "url('/images/pokemons icon/019-mew.png')";
         pokemonIcon.style.backgroundSize = 'contain';
         pokemonIcon.style.backgroundRepeat = 'no-repeat';
         pokemonIcon.style.backgroundPosition = 'center';
@@ -772,7 +772,7 @@
           pokeball.style.top = e.clientY - 30 + 'px';
           pokeball.style.width = '60px';
           pokeball.style.height = '60px';
-          pokeball.style.backgroundImage = "url('images/logo/pokeball48.svg')";
+          pokeball.style.backgroundImage = "url('/images/logo/pokeball48.svg')";
           pokeball.style.backgroundSize = 'contain';
           pokeball.style.backgroundRepeat = 'no-repeat';
           pokeball.style.zIndex = '9999';
@@ -796,7 +796,7 @@
             pokemon.style.height = '60px';
             
             // 获取精灵名称和图片URL
-            const pokemonImageUrl = `images/pokemons icon/${randomPokemonIcon}`;
+            const pokemonImageUrl = `/images/pokemons icon/${randomPokemonIcon}`;
             let pokemonName = '';
             
             // 根据文件名设置精灵名称
@@ -850,7 +850,7 @@
       // 创建悬浮捕捉按钮
       const catchButton = document.createElement('div');
       catchButton.classList.add('floating-catch-button');
-      catchButton.innerHTML = `<img src="images/logo/pokeball48.svg" alt="捕捉按钮">`;
+      catchButton.innerHTML = `<img src="/images/logo/pokeball48.svg" alt="捕捉按钮">`;
       document.body.appendChild(catchButton);
       
       // 为悬浮捕捉按钮添加点击事件
@@ -871,19 +871,19 @@
       let pokemonImageUrl = '';
       switch(randomPokemon) {
         case 'pikachu':
-          pokemonImageUrl = 'images/pokemons icon/001-pikachu.png';
+          pokemonImageUrl = '/images/pokemons icon/001-pikachu.png';
           break;
         case 'bulbasaur':
-          pokemonImageUrl = 'images/pokemons icon/003-bullbasaur.png';
+          pokemonImageUrl = '/images/pokemons icon/003-bullbasaur.png';
           break;
         case 'charmander':
-          pokemonImageUrl = 'images/pokemons icon/024-charmander.png';
+          pokemonImageUrl = '/images/pokemons icon/024-charmander.png';
           break;
         case 'squirtle':
-          pokemonImageUrl = 'images/pokemons icon/023-squirtle.png';
+          pokemonImageUrl = '/images/pokemons icon/023-squirtle.png';
           break;
         case 'jigglypuff':
-          pokemonImageUrl = 'images/pokemons icon/004-jigglypuff.png';
+          pokemonImageUrl = '/images/pokemons icon/004-jigglypuff.png';
           break;
       }
       pokemon.style.backgroundImage = `url('${pokemonImageUrl}')`;
@@ -903,7 +903,7 @@
           catchPokeball.style.transform = 'translate(-50%, -50%)';
           catchPokeball.style.width = '80px';
           catchPokeball.style.height = '80px';
-          catchPokeball.style.backgroundImage = "url('images/logo/pokeball48.svg')";
+          catchPokeball.style.backgroundImage = "url('/images/logo/pokeball48.svg')";
           catchPokeball.style.backgroundSize = 'contain';
           catchPokeball.style.backgroundRepeat = 'no-repeat';
           catchPokeball.style.zIndex = '9999';
@@ -958,7 +958,7 @@
   <nav class="navbar">
     <div class="nav-container">
       <div class="logo">
-        <img src="images/logo/pokeball.svg" alt="KOL Pokemon Logo">
+        <img src="/images/logo/pokeball.svg" alt="KOL Pokemon Logo">
         <h1>KOL Pokemon</h1>
       </div>
       <ul class="nav-links">
@@ -994,28 +994,28 @@
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon">
-          <img src="images/pokemons icon/001-pikachu.png" alt="多平台支持">
+          <img src="/images/pokemons icon/001-pikachu.png" alt="多平台支持">
         </div>
         <h3>多平台支持</h3>
         <p>支持YouTube、TikTok和Instagram三大主流社交媒体平台，轻松捕捉各平台KOL信息。</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
-          <img src="images/pokemons icon/003-bullbasaur.png" alt="一键同步">
+          <img src="/images/pokemons icon/003-bullbasaur.png" alt="一键同步">
         </div>
         <h3>一键同步</h3>
         <p>只需点击一下，即可将KOL信息同步到飞书多维表格，高效管理您的KOL资源库。</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
-          <img src="images/pokemons icon/024-charmander.png" alt="Pokemon主题">
+          <img src="/images/pokemons icon/024-charmander.png" alt="Pokemon主题">
         </div>
         <h3>Pokemon主题</h3>
         <p>精美的Pokemon主题设计，每次捕捉KOL时都会随机出现不同的宝可梦，让工作充满乐趣。</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
-          <img src="images/pokemons icon/022-dratini.png" alt="批量同步">
+          <img src="/images/pokemons icon/022-dratini.png" alt="批量同步">
         </div>
         <h3>批量同步 <span style="font-size: 0.7em; color: var(--pokemon-red); background-color: rgba(255, 0, 0, 0.1); padding: 2px 6px; border-radius: 10px; margin-left: 5px;">Beta</span></h3>
         <p>支持从社媒平台的搜索结果页中一键批量同步多个红人信息到飞书多维表格，大幅提升工作效率。</p>
@@ -1076,7 +1076,7 @@
         <h3>简单易用的界面</h3>
         <div class="demo-feature">
           <div class="demo-feature-icon">
-            <img src="images/pokemons icon/001-pikachu.png" alt="自动识别">
+            <img src="/images/pokemons icon/001-pikachu.png" alt="自动识别">
           </div>
           <div>
             <h4>自动识别KOL信息</h4>
@@ -1085,7 +1085,7 @@
         </div>
         <div class="demo-feature">
           <div class="demo-feature-icon">
-            <img src="images/pokemons icon/003-bullbasaur.png" alt="Pokemon主题">
+            <img src="/images/pokemons icon/003-bullbasaur.png" alt="Pokemon主题">
           </div>
           <div>
             <h4>Pokemon主题交互</h4>
@@ -1094,7 +1094,7 @@
         </div>
         <div class="demo-feature">
           <div class="demo-feature-icon">
-            <img src="images/pokemons icon/024-charmander.png" alt="飞书同步">
+            <img src="/images/pokemons icon/024-charmander.png" alt="飞书同步">
           </div>
           <div>
             <h4>飞书多维表格同步</h4>
@@ -1103,7 +1103,7 @@
         </div>
         <div class="demo-feature">
           <div class="demo-feature-icon">
-            <img src="images/pokemons icon/004-jigglypuff.png" alt="数据分析">
+            <img src="/images/pokemons icon/004-jigglypuff.png" alt="数据分析">
           </div>
           <div>
             <h4>数据分析功能</h4>
@@ -1112,7 +1112,7 @@
         </div>
         <div class="demo-feature">
           <div class="demo-feature-icon">
-            <img src="images/pokemons icon/022-dratini.png" alt="批量同步">
+            <img src="/images/pokemons icon/022-dratini.png" alt="批量同步">
           </div>
           <div>
             <h4>批量红人同步 <span style="font-size: 0.7em; color: var(--pokemon-red); background-color: rgba(255, 0, 0, 0.1); padding: 2px 6px; border-radius: 10px; margin-left: 5px;">Beta</span></h4>
@@ -1121,7 +1121,7 @@
         </div>
       </div>
       <div class="demo-image">
-        <img src="images/plugin-demo.svg" alt="KOL Pokemon插件演示" style="width: 100%; max-width: 500px; height: auto; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+        <img src="/images/plugin-demo.svg" alt="KOL Pokemon插件演示" style="width: 100%; max-width: 500px; height: auto; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
       </div>
     </div>
   </section>
@@ -1132,7 +1132,7 @@
       <h2>立即开始捕捉KOL</h2>
       <p>免费下载KOL Pokemon插件，开启您的KOL捕捉之旅！</p>
       <a href="#" class="download-chrome-btn">
-        <img src="images/chrome-icon.svg" alt="Chrome">
+        <img src="/images/chrome-icon.svg" alt="Chrome">
         添加到Chrome
       </a>
     </div>
@@ -1142,7 +1142,7 @@
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-logo">
-        <img src="images/logo/pokeball48.svg" alt="KOL Pokemon Logo">
+        <img src="/images/logo/pokeball48.svg" alt="KOL Pokemon Logo">
         <h2>KOL Pokemon</h2>
       </div>
       <div class="footer-links">
@@ -1153,9 +1153,9 @@
         <a href="https://nsksiwszvz.feishu.cn/docx/AJnGdURYCoWYInx1NSEcA01KnWt" target="_blank">使用指南</a>
       </div>
       <div class="footer-social">
-        <a href="#" target="_blank"><img src="images/logo/pokeball.svg" alt="微信"></a>
-        <a href="#" target="_blank"><img src="images/logo/pokeball.svg" alt="微博"></a>
-        <a href="#" target="_blank"><img src="images/logo/pokeball.svg" alt="知乎"></a>
+        <a href="#" target="_blank"><img src="/images/logo/pokeball.svg" alt="微信"></a>
+        <a href="#" target="_blank"><img src="/images/logo/pokeball.svg" alt="微博"></a>
+        <a href="#" target="_blank"><img src="/images/logo/pokeball.svg" alt="知乎"></a>
       </div>
       <div class="copyright">
         &copy; 2025 KOL Pokemon. All rights reserved.

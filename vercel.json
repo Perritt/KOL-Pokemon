@@ -4,6 +4,14 @@
     { "src": "*.html", "use": "@vercel/static" }
   ],
   "routes": [
+    { 
+      "src": "/images/(.*)", 
+      "headers": { 
+        "cache-control": "public, max-age=31536000, immutable",
+        "Access-Control-Allow-Origin": "*"
+      },
+      "dest": "/images/$1" 
+    },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
