@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+  <!-- 精灵球上半部分 -->
+  <path d="M24 46.5C36.4264 46.5 46.5 36.4264 46.5 24C46.5 11.5736 36.4264 1.5 24 1.5C11.5736 1.5 1.5 11.5736 1.5 24C1.5 36.4264 11.5736 46.5 24 46.5Z" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <path d="M24 1.5C11.5736 1.5 1.5 11.5736 1.5 24H46.5C46.5 11.5736 36.4264 1.5 24 1.5Z" fill="#FF0000"/>
+  <!-- 精灵球中间黑线 -->
+  <rect x="1.5" y="23" width="45" height="2" fill="#000000"/>
+  <!-- 精灵球中间按钮 -->
+  <circle cx="24" cy="24" r="7" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+  <circle cx="24" cy="24" r="3" fill="#FFFFFF" stroke="#000000" stroke-width="1"/>
+</svg>

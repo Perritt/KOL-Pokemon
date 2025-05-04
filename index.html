@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KOL Pokemon - 捕捉网红的神奇工具</title>
+  <link rel="icon" href="images/logo/pokeball48.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --pokemon-blue: #3D7DCA;
+      --pokemon-yellow: #FFCB05;
+      --pokemon-red: #FF0000;
+      --pokemon-light-blue: #5DB9FF;
+      --text-color: #333333;
+      --background-color: #f9f9f9;
+      --section-bg: #ffffff;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text-color);
+      background-color: var(--background-color);
+      line-height: 1.6;
+    }
+    
+    /* 导航栏样式 */
+    .navbar {
+      background-color: var(--pokemon-blue);
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    
+    .logo h1 {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-links li {
+      margin-left: 2rem;
+    }
+    
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-links a:hover {
+      color: var(--pokemon-yellow);
+    }
+    
+    .download-btn {
+      background-color: var(--pokemon-yellow);
+      color: var(--text-color) !important;
+      padding: 0.5rem 1.5rem;
+      border-radius: 20px;
+      font-weight: bold !important;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      background-color: #FFD74A;
+    }
+    
+    /* 英雄区域样式 */
+    .hero {
+      background: linear-gradient(135deg, var(--pokemon-blue), var(--pokemon-light-blue));
+      padding: 8rem 2rem 6rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero h2 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .hero p {
+      color: white;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .hero-btn {
+      display: inline-block;
+      background-color: var(--pokemon-yellow);
+      color: var(--text-color);
+      padding: 0.8rem 2.5rem 0.8rem 3rem;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+      margin: 0 10px 20px;
+    }
+    
+    .hero-btn::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      background-image: url('images/logo/pokeball48.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: transform 0.5s;
+    }
+    
+    .hero-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      background-color: #FFD74A;
+    }
+    
+    .hero-btn:hover::before {
+      transform: translateY(-50%) rotate(360deg);
+    }
+    
+    /* 捕捉动画效果 */
+    @keyframes catch {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .catch-animation {
+      animation: catch 1s ease-in-out;
+    }
+    
+    .floating-pokeballs {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+    
+    .pokeball {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background-image: url('images/logo/pokeball48.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.2;
+      animation: float 15s infinite linear;
+    }
+    
+    .pokeball:nth-child(1) {
+      top: 10%;
+      left: 10%;
+      animation-duration: 20s;
+      animation-delay: 0s;
+    }
+    
+    .pokeball:nth-child(2) {
+      top: 20%;
+      right: 15%;
+      animation-duration: 25s;
+      animation-delay: 2s;
+    }
+    
+    .pokeball:nth-child(3) {
+      bottom: 15%;
+      left: 20%;
+      animation-duration: 22s;
+      animation-delay: 5s;
+    }
+    
+    .pokeball:nth-child(4) {
+      bottom: 25%;
+      right: 10%;
+      animation-duration: 18s;
+      animation-delay: 7s;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(50px, 20px) rotate(90deg);
+      }
+      50% {
+        transform: translate(0, 50px) rotate(180deg);
+      }
+      75% {
+        transform: translate(-50px, 20px) rotate(270deg);
+      }
+      100% {
+        transform: translate(0, 0) rotate(360deg);
+      }
+    }
+    
+    /* 特性部分样式 */
+    .features {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    
+    .section-title h2 {
+      font-size: 2rem;
+      color: var(--pokemon-blue);
+      display: inline-block;
+      padding-bottom: 10px;
+      position: relative;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: var(--pokemon-yellow);
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .feature-card {
+      background-color: var(--section-bg);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--pokemon-blue), var(--pokemon-yellow));
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(61, 125, 202, 0.1);
+      border-radius: 50%;
+    }
+    
+    .feature-icon img {
+      width: 40px;
+      height: 40px;
+      transition: transform 0.5s ease;
+    }
+    
+    .feature-icon:hover img {
+      transform: rotate(20deg) scale(1.2);
+    }
+    
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--pokemon-blue);
+    }
+    
+    .feature-card p {
+      color: #666;
+    }
+    
+    /* 工作流程部分 */
+    .how-it-works {
+      background-color: #f0f8ff;
+      padding: 5rem 2rem;
+    }
+    
+    .workflow-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .workflow-steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .workflow-step {
+      width: 220px;
+      text-align: center;
+      padding: 0 1rem;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .step-number {
+      width: 50px;
+      height: 50px;
+      background-color: var(--pokemon-blue);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 0 auto 1rem;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .workflow-step h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--pokemon-blue);
+    }
+    
+    .workflow-step p {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .workflow-line {
+      position: absolute;
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 2px;
+      background-color: var(--pokemon-yellow);
+      width: 80%;
+      z-index: 1;
+    }
+    
+    /* 演示部分 */
+    .demo {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .demo-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+    }
+    
+    .demo-content {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .demo-image {
+      flex: 1;
+      min-width: 300px;
+      text-align: center;
+      max-width: 350px;
+      padding: 0 10px;
+    }
+    
+    .demo-image img {
+      max-width: 55%;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: 5px solid white;
+    }
+    
+    .demo-content h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--pokemon-blue);
+    }
+    
+    .demo-feature {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .demo-feature-icon {
+      margin-right: 15px;
+      min-width: 24px;
+    }
+    
+    .demo-feature-icon img {
+      width: 24px;
+      height: 24px;
+    }
+    
+    /* 下载部分 */
+    .download {
+      background: linear-gradient(135deg, var(--pokemon-blue), var(--pokemon-light-blue));
+      padding: 5rem 2rem;
+      text-align: center;
+      color: white;
+    }
+    
+    .download-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .download h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .download p {
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+    
+    .download-chrome-btn {
+      display: inline-flex;
+      align-items: center;
+      background-color: white;
+      color: var(--text-color);
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .download-chrome-btn img {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
+    
+    .download-chrome-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      background-color: #f5f5f5;
+    }
+    
+    /* 页脚部分 */
+    .footer {
+      background-color: #2c3e50;
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    
+    .footer-logo h2 {
+      font-size: 1.5rem;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--pokemon-yellow);
+    }
+    
+    .footer-social {
+      margin-bottom: 2rem;
+    }
+    
+    .footer-social a {
+      display: inline-block;
+      margin: 0 10px;
+      color: white;
+      text-decoration: none;
+    }
+    
+    .footer-social img {
+      width: 30px;
+      height: 30px;
+      transition: transform 0.3s ease;
+    }
+    
+    .footer-social img:hover {
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    
+    .vendor-tag {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+    
+    /* 悬浮捕捉按钮 */
+    .floating-catch-button {
+      position: fixed;
+      right: 30px;
+      bottom: 30px;
+      width: 60px;
+      height: 60px;
+      background-color: var(--pokemon-yellow);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    
+    .floating-catch-button img {
+      width: 35px;
+      height: 35px;
+    }
+    
+    .floating-catch-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 1rem;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .hero h2 {
+        font-size: 2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .workflow-steps {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .workflow-step {
+        margin-bottom: 2rem;
+      }
+      
+      .workflow-line {
+        display: none;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取按钮元素
+      const downloadBtns = document.querySelectorAll('.download-btn, .download-chrome-btn');
+      const storeInstallBtn = document.querySelector('.hero-btn:nth-of-type(1)');
+      const localInstallBtn = document.querySelector('.hero-btn:nth-of-type(2)');
+      
+      // 为商店安装和立即安装按钮添加点击事件
+      if (storeInstallBtn) {
+        storeInstallBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.open('https://chromewebstore.google.com/detail/kol-pokemon/odbdafcachcieeidmnnaomkedgfccmap', '_blank');
+        });
+      }
+      
+      if (localInstallBtn) {
+        localInstallBtn.href = 'https://nsksiwszvz.feishu.cn/docx/AJnGdURYCoWYInx1NSEcA01KnWt';
+        localInstallBtn.target = '_blank';
+      }
+      
+      downloadBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.open('https://chromewebstore.google.com/detail/kol-pokemon/odbdafcachcieeidmnnaomkedgfccmap', '_blank');
+        });
+      });
+      
+      // 显示Pokemon风格的消息提示
+      function showPokemonMessage(message) {
+        const messageEl = document.createElement('div');
+        messageEl.style.position = 'fixed';
+        messageEl.style.left = '50%';
+        messageEl.style.top = '50%';
+        messageEl.style.transform = 'translate(-50%, -50%)';
+        messageEl.style.padding = '15px 25px';
+        messageEl.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+        messageEl.style.borderRadius = '10px';
+        messageEl.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.3)';
+        messageEl.style.zIndex = '10000';
+        messageEl.style.fontWeight = 'bold';
+        messageEl.style.fontSize = '18px';
+        messageEl.style.color = '#3D7DCA';
+        messageEl.style.border = '3px solid #FFCB05';
+        messageEl.style.textAlign = 'center';
+        messageEl.innerHTML = message;
+        
+        // 添加精灵图标
+        const pokemonIcon = document.createElement('div');
+        pokemonIcon.style.width = '60px';
+        pokemonIcon.style.height = '60px';
+        pokemonIcon.style.margin = '10px auto';
+        pokemonIcon.style.backgroundImage = "url('images/pokemons icon/019-mew.png')";
+        pokemonIcon.style.backgroundSize = 'contain';
+        pokemonIcon.style.backgroundRepeat = 'no-repeat';
+        pokemonIcon.style.backgroundPosition = 'center';
+        
+        messageEl.prepend(pokemonIcon);
+        document.body.appendChild(messageEl);
+        
+        // 添加闪烁动画
+        let opacity = 1;
+        let fadeOut = true;
+        const animate = setInterval(() => {
+          if (fadeOut) {
+            opacity -= 0.05;
+            if (opacity <= 0.7) fadeOut = false;
+          } else {
+            opacity += 0.05;
+            if (opacity >= 1) fadeOut = true;
+          }
+          pokemonIcon.style.opacity = opacity;
+        }, 50);
+        
+        // 3秒后移除元素
+        setTimeout(() => {
+          clearInterval(animate);
+          messageEl.remove();
+        }, 3000);
+      }
+      
+      // 为文档添加点击事件，随机掉落精灵
+      document.addEventListener('click', function(e) {
+        // 排除按钮和其他交互元素的点击
+        if (!e.target.closest('a') && !e.target.closest('button') && 
+            !e.target.closest('.floating-catch-button') && 
+            !e.target.closest('.navbar') && 
+            !e.target.closest('.feature-card') && 
+            !e.target.closest('.workflow-step')) {
+          // 获取所有不含'avatar'的精灵图片
+          const pokemonIcons = [];
+          // 从pokemons icon文件夹中获取所有不含'avatar'的图片
+          const allPokemonIcons = [
+            '001-pikachu.png', '002-snorlax.png', '003-bullbasaur.png', '004-jigglypuff.png',
+            '008-psyduck.png', '013-mankey.png', '018-game.png', '019-mew.png',
+            '022-dratini.png', '023-squirtle.png', '024-charmander.png'
+          ];
+          
+          // 过滤掉包含'avatar'的图片
+          for (let icon of allPokemonIcons) {
+            if (!icon.includes('avatar')) {
+              pokemonIcons.push(icon);
+            }
+          };
+          
+          // 随机选择一个精灵
+          const randomPokemonIcon = pokemonIcons[Math.floor(Math.random() * pokemonIcons.length)];
+          
+          // 创建精灵球元素
+          const pokeball = document.createElement('div');
+          pokeball.classList.add('pokeball');
+          pokeball.style.position = 'fixed';
+          pokeball.style.left = e.clientX - 30 + 'px';
+          pokeball.style.top = e.clientY - 30 + 'px';
+          pokeball.style.width = '60px';
+          pokeball.style.height = '60px';
+          pokeball.style.backgroundImage = "url('images/logo/pokeball48.svg')";
+          pokeball.style.backgroundSize = 'contain';
+          pokeball.style.backgroundRepeat = 'no-repeat';
+          pokeball.style.zIndex = '9999';
+          pokeball.style.opacity = '1';
+          
+          document.body.appendChild(pokeball);
+          
+          // 添加动画类
+          pokeball.classList.add('catch-animation');
+          
+          // 动画结束后显示宝可梦
+          setTimeout(() => {
+            pokeball.remove();
+            
+            // 创建宝可梦元素
+            const pokemon = document.createElement('div');
+            pokemon.style.position = 'fixed';
+            pokemon.style.left = e.clientX - 30 + 'px';
+            pokemon.style.top = e.clientY - 30 + 'px';
+            pokemon.style.width = '60px';
+            pokemon.style.height = '60px';
+            
+            // 获取精灵名称和图片URL
+            const pokemonImageUrl = `images/pokemons icon/${randomPokemonIcon}`;
+            let pokemonName = '';
+            
+            // 根据文件名设置精灵名称
+            if (randomPokemonIcon.includes('pikachu')) pokemonName = '皮卡丘';
+            else if (randomPokemonIcon.includes('bullbasaur')) pokemonName = '妙蛙种子';
+            else if (randomPokemonIcon.includes('charmander')) pokemonName = '小火龙';
+            else if (randomPokemonIcon.includes('squirtle')) pokemonName = '杰尼龟';
+            else if (randomPokemonIcon.includes('jigglypuff')) pokemonName = '胖丁';
+            else if (randomPokemonIcon.includes('psyduck')) pokemonName = '可达鸭';
+            else if (randomPokemonIcon.includes('mankey')) pokemonName = '猴怪';
+            else if (randomPokemonIcon.includes('mew')) pokemonName = '梦幻';
+            else if (randomPokemonIcon.includes('dratini')) pokemonName = '迷你龙';
+            else pokemonName = '神奇宝贝';
+            
+            pokemon.style.backgroundImage = `url('${pokemonImageUrl}')`;
+            pokemon.style.backgroundSize = 'contain';
+            pokemon.style.backgroundRepeat = 'no-repeat';
+            pokemon.style.zIndex = '9998';
+            
+            document.body.appendChild(pokemon);
+            
+            // 显示捕获消息
+            const message = document.createElement('div');
+            message.style.position = 'fixed';
+            message.style.left = e.clientX + 'px';
+            message.style.top = e.clientY - 80 + 'px';
+            message.style.transform = 'translateX(-50%)';
+            message.style.padding = '10px 15px';
+            message.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+            message.style.borderRadius = '10px';
+            message.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+            message.style.zIndex = '10000';
+            message.style.fontWeight = 'bold';
+            message.style.fontSize = '16px';
+            message.style.color = '#3D7DCA';
+            message.innerHTML = `恭喜！你发现了${pokemonName}！`;
+            
+            document.body.appendChild(message);
+            
+            // 2秒后移除元素
+            setTimeout(() => {
+              pokemon.remove();
+              message.remove();
+            }, 2000);
+          }, 1000);
+        }
+      });
+      
+      // 移除按钮点击时的精灵球特效
+      
+      // 创建悬浮捕捉按钮
+      const catchButton = document.createElement('div');
+      catchButton.classList.add('floating-catch-button');
+      catchButton.innerHTML = `<img src="images/logo/pokeball48.svg" alt="捕捉按钮">`;
+      document.body.appendChild(catchButton);
+      
+      // 为悬浮捕捉按钮添加点击事件
+      catchButton.addEventListener('click', function() {
+        // 随机选择一个宝可梦
+        const pokemons = ['pikachu', 'bulbasaur', 'charmander', 'squirtle', 'jigglypuff'];
+        const randomPokemon = pokemons[Math.floor(Math.random() * pokemons.length)];
+        
+        // 创建宝可梦元素
+        const pokemon = document.createElement('div');
+        pokemon.style.position = 'fixed';
+        pokemon.style.left = '50%';
+        pokemon.style.top = '50%';
+        pokemon.style.transform = 'translate(-50%, -50%)';
+        pokemon.style.width = '100px';
+        pokemon.style.height = '100px';
+        // 根据随机选择的宝可梦设置对应的图片
+      let pokemonImageUrl = '';
+      switch(randomPokemon) {
+        case 'pikachu':
+          pokemonImageUrl = 'images/pokemons icon/001-pikachu.png';
+          break;
+        case 'bulbasaur':
+          pokemonImageUrl = 'images/pokemons icon/003-bullbasaur.png';
+          break;
+        case 'charmander':
+          pokemonImageUrl = 'images/pokemons icon/024-charmander.png';
+          break;
+        case 'squirtle':
+          pokemonImageUrl = 'images/pokemons icon/023-squirtle.png';
+          break;
+        case 'jigglypuff':
+          pokemonImageUrl = 'images/pokemons icon/004-jigglypuff.png';
+          break;
+      }
+      pokemon.style.backgroundImage = `url('${pokemonImageUrl}')`;
+        pokemon.style.backgroundSize = 'contain';
+        pokemon.style.backgroundRepeat = 'no-repeat';
+        pokemon.style.zIndex = '9998';
+        
+        document.body.appendChild(pokemon);
+        
+        // 创建捕捉动画
+        setTimeout(() => {
+          const catchPokeball = document.createElement('div');
+          catchPokeball.classList.add('pokeball');
+          catchPokeball.style.position = 'fixed';
+          catchPokeball.style.left = '50%';
+          catchPokeball.style.top = '30%';
+          catchPokeball.style.transform = 'translate(-50%, -50%)';
+          catchPokeball.style.width = '80px';
+          catchPokeball.style.height = '80px';
+          catchPokeball.style.backgroundImage = "url('images/logo/pokeball48.svg')";
+          catchPokeball.style.backgroundSize = 'contain';
+          catchPokeball.style.backgroundRepeat = 'no-repeat';
+          catchPokeball.style.zIndex = '9999';
+          
+          document.body.appendChild(catchPokeball);
+          
+          // 精灵球下落动画
+          let position = 30;
+          const fallInterval = setInterval(() => {
+            position += 2;
+            catchPokeball.style.top = position + '%';
+            
+            if (position >= 50) {
+              clearInterval(fallInterval);
+              catchPokeball.classList.add('catch-animation');
+              
+              // 捕捉成功消息
+              setTimeout(() => {
+                pokemon.remove();
+                catchPokeball.remove();
+                
+                const message = document.createElement('div');
+                message.style.position = 'fixed';
+                message.style.left = '50%';
+                message.style.top = '50%';
+                message.style.transform = 'translate(-50%, -50%)';
+                message.style.padding = '20px';
+                message.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+                message.style.borderRadius = '10px';
+                message.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+                message.style.zIndex = '10000';
+                message.style.fontWeight = 'bold';
+                message.style.fontSize = '18px';
+                message.style.color = '#3D7DCA';
+                message.innerHTML = `恭喜！你成功捕捉了 ${randomPokemon.charAt(0).toUpperCase() + randomPokemon.slice(1)}！`;
+                
+                document.body.appendChild(message);
+                
+                setTimeout(() => {
+                  message.remove();
+                }, 2000);
+              }, 1000);
+            }
+          }, 50);
+        }, 500);
+      });
+    });
+  </script>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <img src="images/logo/pokeball.svg" alt="KOL Pokemon Logo">
+        <h1>KOL Pokemon</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#features">特性</a></li>
+        <li><a href="#how-it-works">工作原理</a></li>
+        <li><a href="#demo">演示</a></li>
+        <li><a href="#download" class="download-btn">立即安装</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- 英雄区域 -->
+  <section class="hero">
+    <div class="floating-pokeballs">
+      <div class="pokeball"></div>
+      <div class="pokeball"></div>
+      <div class="pokeball"></div>
+      <div class="pokeball"></div>
+    </div>
+    <div class="hero-content">
+      <h2>捕捉网红，就像捕捉宝可梦一样简单</h2>
+      <p>KOL Pokemon是一款Chrome浏览器插件，可一键保存YouTube、TikTok和Instagram的KOL主页链接到飞书多维表格，助力您的网红营销。</p>
+      <a href="#download" class="hero-btn">从商店安装</a>
+      <a href="#how-it-works" class="hero-btn">从本地安装</a>
+    </div>
+  </section>
+  
+  <!-- 特性部分 -->
+  <section class="features" id="features">
+    <div class="section-title">
+      <h2>强大特性</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <img src="images/pokemons icon/001-pikachu.png" alt="多平台支持">
+        </div>
+        <h3>多平台支持</h3>
+        <p>支持YouTube、TikTok和Instagram三大主流社交媒体平台，轻松捕捉各平台KOL信息。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <img src="images/pokemons icon/003-bullbasaur.png" alt="一键同步">
+        </div>
+        <h3>一键同步</h3>
+        <p>只需点击一下，即可将KOL信息同步到飞书多维表格，高效管理您的KOL资源库。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <img src="images/pokemons icon/024-charmander.png" alt="Pokemon主题">
+        </div>
+        <h3>Pokemon主题</h3>
+        <p>精美的Pokemon主题设计，每次捕捉KOL时都会随机出现不同的宝可梦，让工作充满乐趣。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <img src="images/pokemons icon/022-dratini.png" alt="批量同步">
+        </div>
+        <h3>批量同步 <span style="font-size: 0.7em; color: var(--pokemon-red); background-color: rgba(255, 0, 0, 0.1); padding: 2px 6px; border-radius: 10px; margin-left: 5px;">Beta</span></h3>
+        <p>支持从社媒平台的搜索结果页中一键批量同步多个红人信息到飞书多维表格，大幅提升工作效率。</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- 工作流程部分 -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="section-title">
+      <h2>如何使用</h2>
+    </div>
+    <div class="workflow-container">
+      <div class="workflow-steps">
+        <div class="workflow-line"></div>
+        <div class="workflow-step">
+          <div class="step-number">1</div>
+          <h3>安装插件</h3>
+          <p>从Chrome商店下载并安装KOL Pokemon插件</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">2</div>
+          <h3>访问KOL主页</h3>
+          <p>打开YouTube、TikTok或Instagram上的KOL主页</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">3</div>
+          <h3>输入飞书表格</h3>
+          <p>在插件中输入您的飞书多维表格链接</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">4</div>
+          <h3>一键同步</h3>
+          <p>点击同步按钮，KOL信息立即保存到飞书表格</p>
+        </div>
+      </div>
+      <style>
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+          border: 5px solid white;
+        }
+        .workflow-caption {
+          margin-top: 1rem;
+          font-size: 1.1rem;
+          color: var(--pokemon-blue);
+          font-weight: bold;
+        }
+      </style>
+    </div>
+  </section>
+  
+  <!-- 演示部分 -->
+  <section class="demo" id="demo">
+    <div class="section-title">
+      <h2>插件演示</h2>
+    </div>
+    <div class="demo-container">
+      <div class="demo-content">
+        <h3>简单易用的界面</h3>
+        <div class="demo-feature">
+          <div class="demo-feature-icon">
+            <img src="images/pokemons icon/001-pikachu.png" alt="自动识别">
+          </div>
+          <div>
+            <h4>自动识别KOL信息</h4>
+            <p>插件会自动识别并提取当前页面的KOL信息，包括名称、粉丝数和平台类型。</p>
+          </div>
+        </div>
+        <div class="demo-feature">
+          <div class="demo-feature-icon">
+            <img src="images/pokemons icon/003-bullbasaur.png" alt="Pokemon主题">
+          </div>
+          <div>
+            <h4>Pokemon主题交互</h4>
+            <p>每次捕捉KOL时，会随机出现不同的宝可梦形象，增添工作乐趣。</p>
+          </div>
+        </div>
+        <div class="demo-feature">
+          <div class="demo-feature-icon">
+            <img src="images/pokemons icon/024-charmander.png" alt="飞书同步">
+          </div>
+          <div>
+            <h4>飞书多维表格同步</h4>
+            <p>一键将KOL信息同步到飞书多维表格，高效管理您的KOL资源库。</p>
+          </div>
+        </div>
+        <div class="demo-feature">
+          <div class="demo-feature-icon">
+            <img src="images/pokemons icon/004-jigglypuff.png" alt="数据分析">
+          </div>
+          <div>
+            <h4>数据分析功能</h4>
+            <p>智能分析KOL数据，帮助您找到最适合品牌合作的网红资源。</p>
+          </div>
+        </div>
+        <div class="demo-feature">
+          <div class="demo-feature-icon">
+            <img src="images/pokemons icon/022-dratini.png" alt="批量同步">
+          </div>
+          <div>
+            <h4>批量红人同步 <span style="font-size: 0.7em; color: var(--pokemon-red); background-color: rgba(255, 0, 0, 0.1); padding: 2px 6px; border-radius: 10px; margin-left: 5px;">Beta</span></h4>
+            <p>从社媒平台的搜索结果页中一键批量同步多个红人信息，节省大量手动操作时间。</p>
+          </div>
+        </div>
+      </div>
+      <div class="demo-image">
+        <img src="images/plugin-demo.svg" alt="KOL Pokemon插件演示" style="width: 100%; max-width: 500px; height: auto; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+      </div>
+    </div>
+  </section>
+  
+  <!-- 下载部分 -->
+  <section class="download" id="download">
+    <div class="download-container">
+      <h2>立即开始捕捉KOL</h2>
+      <p>免费下载KOL Pokemon插件，开启您的KOL捕捉之旅！</p>
+      <a href="#" class="download-chrome-btn">
+        <img src="images/chrome-icon.svg" alt="Chrome">
+        添加到Chrome
+      </a>
+    </div>
+  </section>
+  
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <img src="images/logo/pokeball48.svg" alt="KOL Pokemon Logo">
+        <h2>KOL Pokemon</h2>
+      </div>
+      <div class="footer-links">
+        <a href="#features">特性</a>
+        <a href="#how-it-works">工作原理</a>
+        <a href="#demo">演示</a>
+        <a href="#download">下载</a>
+        <a href="https://nsksiwszvz.feishu.cn/docx/AJnGdURYCoWYInx1NSEcA01KnWt" target="_blank">使用指南</a>
+      </div>
+      <div class="footer-social">
+        <a href="#" target="_blank"><img src="images/logo/pokeball.svg" alt="微信"></a>
+        <a href="#" target="_blank"><img src="images/logo/pokeball.svg" alt="微博"></a>
+        <a href="#" target="_blank"><img src="images/logo/pokeball.svg" alt="知乎"></a>
+      </div>
+      <div class="copyright">
+        &copy; 2025 KOL Pokemon. All rights reserved.
+        <span class="vendor-tag">by zhangzw</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

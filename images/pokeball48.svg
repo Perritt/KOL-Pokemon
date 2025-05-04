@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- 精灵球上半部分 - 红色 -->
+  <path d="M24 4C12.96 4 4 12.96 4 24H24V4Z" fill="#FF0000"/>
+  
+  <!-- 精灵球下半部分 - 白色 -->
+  <path d="M24 24H4C4 35.04 12.96 44 24 44C35.04 44 44 35.04 44 24H24Z" fill="#FFFFFF"/>
+  
+  <!-- 精灵球中间的黑色带 -->
+  <path d="M4 22H44V26H4V22Z" fill="#000000"/>
+  
+  <!-- 精灵球中间的白色圆圈 -->
+  <circle cx="24" cy="24" r="6" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  
+  <!-- 精灵球中间的小白色圆圈 -->
+  <circle cx="24" cy="24" r="3" fill="#FFFFFF" stroke="#000000" stroke-width="1"/>
+  
+  <!-- 精灵球上半部分 - 红色 -->
+  <path d="M24 4C35.04 4 44 12.96 44 24H24V4Z" fill="#FF0000"/>
+</svg>

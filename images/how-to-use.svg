@@ -1,0 +1,164 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="600" height="400" fill="#f5f5f5" rx="10" ry="10"/>
+  
+  <!-- 标题 -->
+  <text x="300" y="30" font-family="Arial" font-size="20" font-weight="bold" fill="#3D7DCA" text-anchor="middle">KOL Pokemon 使用演示</text>
+  
+  <!-- 步骤1：安装插件 -->
+  <g id="step1" opacity="1">
+    <rect x="50" y="60" width="500" height="280" rx="10" ry="10" fill="white" stroke="#ddd" stroke-width="1"/>
+    <text x="300" y="90" font-family="Arial" font-size="16" font-weight="bold" fill="#333" text-anchor="middle">步骤1：从Chrome商店安装插件</text>
+    <rect x="150" y="110" width="300" height="200" rx="5" ry="5" fill="#f9f9f9" stroke="#ddd" stroke-width="1"/>
+    <circle cx="180" cy="160" r="20" fill="#FFCB05"/>
+    <path d="M180 140 L180 180 M160 160 L200 160" stroke="white" stroke-width="4"/>
+    <text x="300" y="160" font-family="Arial" font-size="14" fill="#666" text-anchor="middle">KOL Pokemon</text>
+    <rect x="220" y="200" width="160" height="40" rx="20" ry="20" fill="#3D7DCA"/>
+    <text x="300" y="225" font-family="Arial" font-size="14" fill="white" text-anchor="middle">添加到Chrome</text>
+    
+    <circle cx="550" cy="320" r="15" fill="#FFCB05">
+      <animate attributeName="opacity" values="0;1;0" dur="5s" begin="0s" repeatCount="indefinite"/>
+    </circle>
+    <text x="550" y="325" font-family="Arial" font-size="12" fill="white" text-anchor="middle">1</text>
+  </g>
+  
+  <!-- 步骤2：访问KOL主页 -->
+  <g id="step2" opacity="0">
+    <rect x="50" y="60" width="500" height="280" rx="10" ry="10" fill="white" stroke="#ddd" stroke-width="1"/>
+    <text x="300" y="90" font-family="Arial" font-size="16" font-weight="bold" fill="#333" text-anchor="middle">步骤2：访问KOL主页</text>
+    <rect x="150" y="110" width="300" height="200" rx="5" ry="5" fill="#f9f9f9" stroke="#ddd" stroke-width="1"/>
+    
+    <!-- 模拟YouTube页面 -->
+    <rect x="150" y="110" width="300" height="40" fill="#FF0000"/>
+    <circle cx="180" cy="130" r="15" fill="white"/>
+    <polygon points="175,125 175,135 187,130" fill="#FF0000"/>
+    
+    <!-- KOL信息 -->
+    <circle cx="180" cy="180" r="25" fill="#ddd"/>
+    <text x="240" y="175" font-family="Arial" font-size="14" font-weight="bold" fill="#333">网红名称</text>
+    <text x="240" y="195" font-family="Arial" font-size="12" fill="#666">1,234,567 粉丝</text>
+    
+    <!-- 插件图标 -->
+    <circle cx="420" cy="130" r="15" fill="#FFCB05" stroke="#E5B700" stroke-width="1">
+      <animate attributeName="fill" values="#FFCB05;#FFD74A;#FFCB05" dur="2s" begin="5s" repeatCount="3"/>
+    </circle>
+    
+    <circle cx="550" cy="320" r="15" fill="#FFCB05">
+      <animate attributeName="opacity" values="0;1;0" dur="5s" begin="5s" repeatCount="indefinite"/>
+    </circle>
+    <text x="550" y="325" font-family="Arial" font-size="12" fill="white" text-anchor="middle">2</text>
+    
+    <animate attributeName="opacity" values="0;0;1;1;0" dur="15s" begin="0s" repeatCount="indefinite"/>
+  </g>
+  
+  <!-- 步骤3：输入飞书表格 -->
+  <g id="step3" opacity="0">
+    <rect x="50" y="60" width="500" height="280" rx="10" ry="10" fill="white" stroke="#ddd" stroke-width="1"/>
+    <text x="300" y="90" font-family="Arial" font-size="16" font-weight="bold" fill="#333" text-anchor="middle">步骤3：输入飞书多维表格链接</text>
+    
+    <!-- 插件弹窗 -->
+    <rect x="150" y="110" width="300" height="200" rx="10" ry="10" fill="white" stroke="#3D7DCA" stroke-width="2"/>
+    <rect x="150" y="110" width="300" height="40" rx="10" ry="10" fill="#3D7DCA"/>
+    <circle cx="170" cy="130" r="10" fill="#FFCB05"/>
+    <text x="190" y="132" font-family="Arial" font-size="14" font-weight="bold" fill="white">KOL Pokemon</text>
+    
+    <!-- KOL信息 -->
+    <rect x="170" y="160" width="260" height="60" rx="5" ry="5" fill="#f0f8ff" stroke="#ddd" stroke-width="1"/>
+    <circle cx="190" cy="190" r="15" fill="#ddd"/>
+    <text x="220" y="180" font-family="Arial" font-size="12" font-weight="bold" fill="#333">网红名称</text>
+    <text x="220" y="200" font-family="Arial" font-size="10" fill="#666">1,234,567 粉丝</text>
+    
+    <!-- 输入框 -->
+    <rect x="170" y="230" width="260" height="30" rx="5" ry="5" fill="white" stroke="#ddd" stroke-width="1"/>
+    <text x="180" y="250" font-family="Arial" font-size="12" fill="#999">https://feishu.cn/table/...</text>
+    <rect x="430" y="230" width="5" height="30" fill="#3D7DCA">
+      <animate attributeName="opacity" values="0;1;0" dur="1s" begin="10s" repeatCount="5"/>
+    </rect>
+    
+    <circle cx="550" cy="320" r="15" fill="#FFCB05">
+      <animate attributeName="opacity" values="0;1;0" dur="5s" begin="10s" repeatCount="indefinite"/>
+    </circle>
+    <text x="550" y="325" font-family="Arial" font-size="12" fill="white" text-anchor="middle">3</text>
+    
+    <animate attributeName="opacity" values="0;0;0;1;1;0" dur="20s" begin="0s" repeatCount="indefinite"/>
+  </g>
+  
+  <!-- 步骤4：一键同步 -->
+  <g id="step4" opacity="0">
+    <rect x="50" y="60" width="500" height="280" rx="10" ry="10" fill="white" stroke="#ddd" stroke-width="1"/>
+    <text x="300" y="90" font-family="Arial" font-size="16" font-weight="bold" fill="#333" text-anchor="middle">步骤4：一键同步到飞书表格</text>
+    
+    <!-- 插件弹窗 -->
+    <rect x="150" y="110" width="300" height="200" rx="10" ry="10" fill="white" stroke="#3D7DCA" stroke-width="2"/>
+    <rect x="150" y="110" width="300" height="40" rx="10" ry="10" fill="#3D7DCA"/>
+    <circle cx="170" cy="130" r="10" fill="#FFCB05"/>
+    <text x="190" y="132" font-family="Arial" font-size="14" font-weight="bold" fill="white">KOL Pokemon</text>
+    
+    <!-- KOL信息 -->
+    <rect x="170" y="160" width="260" height="60" rx="5" ry="5" fill="#f0f8ff" stroke="#ddd" stroke-width="1"/>
+    <circle cx="190" cy="190" r="15" fill="#ddd"/>
+    <text x="220" y="180" font-family="Arial" font-size="12" font-weight="bold" fill="#333">网红名称</text>
+    <text x="220" y="200" font-family="Arial" font-size="10" fill="#666">1,234,567 粉丝</text>
+    
+    <!-- 输入框 -->
+    <rect x="170" y="230" width="260" height="30" rx="5" ry="5" fill="white" stroke="#ddd" stroke-width="1"/>
+    <text x="180" y="250" font-family="Arial" font-size="12" fill="#333">https://feishu.cn/table/...</text>
+    
+    <!-- 捕捉按钮 -->
+    <rect x="170" y="270" width="260" height="30" rx="15" ry="15" fill="#FFCB05" stroke="#E5B700" stroke-width="1">
+      <animate attributeName="fill" values="#FFCB05;#FFD74A;#FFCB05" dur="0.5s" begin="15s" repeatCount="1"/>
+    </rect>
+    <circle cx="190" cy="285" r="10" fill="white"/>
+    <circle cx="190" cy="285" r="5" fill="#FF0000"/>
+    <text x="300" y="290" font-family="Arial" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">捕捉这个KOL</text>
+    
+    <circle cx="550" cy="320" r="15" fill="#FFCB05">
+      <animate attributeName="opacity" values="0;1;0" dur="5s" begin="15s" repeatCount="indefinite"/>
+    </circle>
+    <text x="550" y="325" font-family="Arial" font-size="12" fill="white" text-anchor="middle">4</text>
+    
+    <animate attributeName="opacity" values="0;0;0;0;1;1;0" dur="25s" begin="0s" repeatCount="indefinite"/>
+  </g>
+  
+  <!-- 步骤5：捕捉成功 -->
+  <g id="step5" opacity="0">
+    <rect x="50" y="60" width="500" height="280" rx="10" ry="10" fill="white" stroke="#ddd" stroke-width="1"/>
+    <text x="300" y="90" font-family="Arial" font-size="16" font-weight="bold" fill="#333" text-anchor="middle">步骤5：捕捉成功！</text>
+    
+    <!-- 插件弹窗 -->
+    <rect x="150" y="110" width="300" height="200" rx="10" ry="10" fill="white" stroke="#3D7DCA" stroke-width="2"/>
+    <rect x="150" y="110" width="300" height="40" rx="10" ry="10" fill="#3D7DCA"/>
+    <circle cx="170" cy="130" r="10" fill="#FFCB05"/>
+    <text x="190" y="132" font-family="Arial" font-size="14" font-weight="bold" fill="white">KOL Pokemon</text>
+    
+    <!-- 成功消息 -->
+    <rect x="170" y="160" width="260" height="100" rx="10" ry="10" fill="#f0f8ff" stroke="#FFCB05" stroke-width="2"/>
+    
+    <!-- 皮卡丘图标 -->
+    <circle cx="300" cy="190" r="25" fill="#FFCB05">
+      <animate attributeName="transform" attributeType="XML" type="rotate" from="-10 300 190" to="10 300 190" dur="0.5s" repeatCount="indefinite" additive="sum"/>
+    </circle>
+    <circle cx="290" cy="185" r="5" fill="black"/>
+    <circle cx="310" cy="185" r="5" fill="black"/>
+    <path d="M295 200 Q300 205 305 200" stroke="black" stroke-width="2" fill="none"/>
+    <path d="M280 180 L275 170 L270 180" stroke="#FFCB05" stroke-width="4" fill="#FFCB05"/>
+    <path d="M320 180 L325 170 L330 180" stroke="#FFCB05" stroke-width="4" fill="#FFCB05"/>
+    
+    <text x="300" y="240" font-family="Arial" font-size="14" font-weight="bold" fill="#3D7DCA" text-anchor="middle">恭喜！成功捕捉KOL！</text>
+    
+    <!-- 飞书表格图标 -->
+    <rect x="170" y="270" width="260" height="30" rx="5" ry="5" fill="#3D7DCA"/>
+    <text x="300" y="290" font-family="Arial" font-size="12" fill="white" text-anchor="middle">在飞书表格中查看</text>
+    
+    <circle cx="550" cy="320" r="15" fill="#FFCB05">
+      <animate attributeName="opacity" values="0;1;0" dur="5s" begin="20s" repeatCount="indefinite"/>
+    </circle>
+    <text x="550" y="325" font-family="Arial" font-size="12" fill="white" text-anchor="middle">5</text>
+    
+    <animate attributeName="opacity" values="0;0;0;0;0;1;1" dur="30s" begin="0s" repeatCount="indefinite"/>
+  </g>
+  
+  <!-- 循环指示器 -->
+  <rect x="250" y="350" width="100" height="20" rx="10" ry="10" fill="#3D7DCA" opacity="0.7"/>
+  <text x="300" y="365" font-family="Arial" font-size="12" fill="white" text-anchor="middle">动画循环中...</text>
+</svg>
